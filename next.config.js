@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+
+const nodeExternals = require('webpack-node-externals');
+
+
+const nextConfig = {
+
+}
 
 module.exports = nextConfig
