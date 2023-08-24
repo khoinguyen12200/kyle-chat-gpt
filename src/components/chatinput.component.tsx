@@ -3,13 +3,14 @@ import React, {useEffect} from "react";
 import {BiSend} from "react-icons/bi";
 import useSocket from "@/hooks/useSocket";
 import {io} from 'socket.io-client';
-import {useAppDispatch} from "@/redux/store";
+import {useAppDispatch, useAppSelector} from "@/redux/store";
 import {addMessage} from "@/redux/conversationSlice";
 
 export default function ChatInput() {
     const dispatch = useAppDispatch();
+    const conversation = useAppSelector(state => state.conversation.conversation);
     const {emit, isReady} = useSocket('chat', (data) => {
-        dispatch(addMessage({message: data, isUser: false}));
+        dispatch(addMessage({message: data, isUser: false, createdAt: new Date()}));
     })
 
     const [message, setMessage] = React.useState<string>("");
@@ -20,10 +21,25 @@ export default function ChatInput() {
 
     function handleSendMessage() {
         if (message.trim().length > 0) {
-            console.log(message)
-            emit(message)
+
+            let fiveFirst = conversation.concat([]).slice(0 , 5);
+            const limitedHistory = fiveFirst.map(
+                (message) => {
+                    return {
+                        message: message.message,
+                        role: message.isUser ? "user" : "system",
+                        createdAt: message.createdAt.toISOString()
+                    }
+                }
+            )
+            const data = {
+                history: limitedHistory,
+                message: message
+            }
+            const dataSend = JSON.stringify(data);
+            emit(dataSend)
             setMessage("")
-            dispatch(addMessage({message: message, isUser: true}));
+            dispatch(addMessage({message: message, isUser: true, createdAt: new Date()}));
         }
     }
 
