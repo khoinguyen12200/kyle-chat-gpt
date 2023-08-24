@@ -27,7 +27,7 @@ export const store = configureStore({
     reducer: {
         conversation: conversationSlice.reducer,
     },
-    // preloadedState: loadState(),
+    preloadedState: loadState(),
     devTools: true,
 });
 store.subscribe(() => {

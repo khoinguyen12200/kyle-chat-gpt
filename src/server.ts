@@ -4,7 +4,6 @@ import next from 'next'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
 import registerChatHandler from "./socket/chatHandler";
-import {Transport} from "engine.io";
 
 const port = parseInt(process.env.PORT ?? '0', 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'

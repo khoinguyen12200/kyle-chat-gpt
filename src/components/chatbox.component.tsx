@@ -8,7 +8,7 @@ import Conversation from "@/components/conversation.component";
 export default function ChatBox() {
 
     return (
-        <div className={"h-screen w-screen p-5"}>
+        <div className={"h-screen w-screen p-10"}>
             <div className="ChatBox flex flex-col w-full h-full rounded-3xl py-3 gap-3">
                 <div className="flex flex-row items-center justify-start px-5">
                     <BsRocketTakeoff/>
