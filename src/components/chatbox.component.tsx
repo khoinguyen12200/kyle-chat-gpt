@@ -43,7 +43,7 @@ export default function ChatBox() {
                             Setting
                         </Modal.Header>
                         <Modal.Body>
-                            <Button color={"failure"} onClick={clearTheConversation}>
+                            <Button className={"w-full"} color={"failure"} onClick={clearTheConversation}>
                                 Clear conversation
                             </Button>
                         </Modal.Body>

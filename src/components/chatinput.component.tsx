@@ -2,7 +2,6 @@
 import React, {useEffect} from "react";
 import {BiSend} from "react-icons/bi";
 import useSocket from "@/hooks/useSocket";
-import {io} from 'socket.io-client';
 import {useAppDispatch, useAppSelector} from "@/redux/store";
 import {addMessage} from "@/redux/conversationSlice";
 
@@ -10,8 +9,9 @@ export default function ChatInput() {
     const dispatch = useAppDispatch();
     const conversation = useAppSelector(state => state.conversation.conversation);
     const {emit, isReady} = useSocket('chat', (data) => {
-        dispatch(addMessage({message: data, isUser: false, createdAt: new Date()}));
+        dispatch(addMessage({message: data, isUser: false}));
     })
+
 
     const [message, setMessage] = React.useState<string>("");
 
@@ -28,7 +28,7 @@ export default function ChatInput() {
                     return {
                         message: message.message,
                         role: message.isUser ? "user" : "system",
-                        createdAt: message.createdAt.toISOString()
+                        createdAt: message.createdAt
                     }
                 }
             )
@@ -39,7 +39,7 @@ export default function ChatInput() {
             const dataSend = JSON.stringify(data);
             emit(dataSend)
             setMessage("")
-            dispatch(addMessage({message: message, isUser: true, createdAt: new Date()}));
+            dispatch(addMessage({message: message, isUser: true}));
         }
     }
 
