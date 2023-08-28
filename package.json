@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx nodemon src/server.ts",
-    "build": "",
-    "start": "NODE_ENV=production npx nodemon src/server.ts",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "@types/react-lottie": "^1.2.6",
     "autoprefixer": "10.4.15",
     "bufferutil": "^4.0.7",
+    "dotenv": "^16.3.1",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
     "express": "^4.18.2",

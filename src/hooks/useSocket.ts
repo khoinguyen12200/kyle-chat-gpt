@@ -1,11 +1,10 @@
 import {useCallback, useState, useEffect, useMemo} from "react";
 import {io} from "socket.io-client";
-import {read} from "fs";
-import {Socket} from "socket.io";
 
 
-const URL = 'http://localhost:3000';
+const URL = process.env.NEXT_PUBLIC_SOCKET_URL ?? 'http://localhost:3000';
 
+console.log(process.env.NEXT_PUBLIC_SOCKET_URL, URL);
 class SocketService {
     private static instance: SocketService;
     private socket: any;
